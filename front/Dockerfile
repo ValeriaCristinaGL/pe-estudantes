@@ -3,6 +3,10 @@ FROM node:24.4-alpine AS builder
 
 WORKDIR /app
 
+# Build arg para injetar a URL da API no build time (NEXT_PUBLIC_ exige isso)
+ARG NEXT_PUBLIC_API_EDU_TRACE
+ENV NEXT_PUBLIC_API_EDU_TRACE=${NEXT_PUBLIC_API_EDU_TRACE}
+
 COPY package.json package-lock.json* ./
 RUN npm install --frozen-lockfile
 
